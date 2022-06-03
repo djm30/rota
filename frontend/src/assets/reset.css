@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Raleway", sans-serif;
+}
+
+:root {
+  --charcoal: #344055;
+  --sapphire: #2e5266;
+  --slate: #6e8898;
+  --cadet: #9fb1bc;
+  --timberwolf: #d3d0cb;
+  --maize: #e2c044;
+  --honeydew: #e0f2e9;
+  --celtic: #266dd3;
+}
