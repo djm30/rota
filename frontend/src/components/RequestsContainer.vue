@@ -24,10 +24,15 @@ export default {
 
 <style scoped>
 .requests {
-  width: 33%;
+  width: 80%;
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+h2 {
+  font-size: 39px;
+  color: #d3d0cb;
 }
 .requests-container {
   padding-top: 24px;

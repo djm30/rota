@@ -2,18 +2,16 @@
   <div class="main">
     <h1>Application</h1>
     <div class="content-container">
-      <RequestsContainer />
       <RotaContainer />
     </div>
   </div>
 </template>
 
 <script>
-import RequestsContainer from "./RequestsContainer.vue";
 import RotaContainer from "./RotaContainer.vue";
 export default {
   name: "ContentContainer",
-  components: { RequestsContainer, RotaContainer },
+  components: { RotaContainer },
 };
 </script>
 
