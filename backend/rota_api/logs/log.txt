@@ -1,0 +1,19 @@
+INFO 2022-06-03T17:49:40.147253100+01:00 - The logger was sucessfully set
+ERROR 2022-06-03T17:49:40.150869600+01:00 - This is an 'error' log
+WARN 2022-06-03T17:49:40.153879100+01:00 - This is a 'warn' log
+INFO 2022-06-03T17:49:40.156227100+01:00 - This is an 'info' log
+INFO 2022-06-03T17:49:40.168314700+01:00 - Starting 8 workers
+INFO 2022-06-03T17:49:40.174191200+01:00 - Starting "actix-web-service-[::1]:4001" service on [::1]:4001
+INFO 2022-06-03T17:49:40.175829200+01:00 - Starting "actix-web-service-127.0.0.1:4001" service on 127.0.0.1:4001
+INFO 2022-06-03T17:49:40.819123600+01:00 - Constructing database...
+	drop: true
+	build false
+	update false
+INFO 2022-06-03T17:49:40.821212+01:00 - Performing drop
+INFO 2022-06-03T17:49:40.823707900+01:00 - Found the file: postgres_database\drop\schemas.sql
+INFO 2022-06-03T17:49:40.827579100+01:00 - Reading from postgres_database\drop\schemas.sql
+INFO 2022-06-03T17:49:41.061983600+01:00 - Client connection successfully established
+INFO 2022-06-03T17:49:41.067575100+01:00 - NOTICE: schema "public" does not exist, skipping
+INFO 2022-06-03T17:49:41.070730600+01:00 - NOTICE: schema "person" does not exist, skipping
+INFO 2022-06-03T17:49:41.072627400+01:00 - NOTICE: schema "task" does not exist, skipping
+INFO 2022-06-03T17:49:41.076324600+01:00 - The client was closed successfully
