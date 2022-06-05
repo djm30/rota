@@ -113,6 +113,7 @@ impl SqlStatement for Build {
 
             queries.append(&mut Self::get_files_contents(&format!("{}\\task\\tables", &CONFIGURATION.database.scripts.build)));
             queries.append(&mut Self::get_files_contents(&format!("{}\\task\\functions", &CONFIGURATION.database.scripts.build)));
+            queries.append(&mut Self::get_files_contents(&format!("{}\\task\\views", &CONFIGURATION.database.scripts.build)));
 
             failed = false;
             queries.iter().for_each(|query|  {
