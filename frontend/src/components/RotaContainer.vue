@@ -29,8 +29,8 @@ export default {
 .rota--container {
   padding-top: 24px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: 100%;
+  grid-template-columns: repeat(1, 1fr);
+  width: 70%;
   gap: 20px;
 }
 
