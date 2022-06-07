@@ -2,11 +2,8 @@ mod config;
 mod endpoints;
 mod database;
 
-use actix_web::web::trace;
 use actix_web::{App, HttpServer};
-use std::path::Path;
 use std::fs;
-use std::fs::File;
 use std::fs::OpenOptions;
 use std::io::Write;
 use chrono;
