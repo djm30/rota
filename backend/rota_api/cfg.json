@@ -18,7 +18,7 @@
     "logging": {
         "level": "info",
         "log_to_file": true,
-        "file_path": "logs\\log.txt",
+        "file_path": "logs\\",
         "append_file": true,
         "overwrite_file": false
     }
