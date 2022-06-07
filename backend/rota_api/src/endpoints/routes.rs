@@ -6,6 +6,7 @@ use serde_json::Value;
 
 use crate::database::db_client::SqlStatement;
 use crate::database::build_models::Build;
+use crate::database::task_models::{CompleteTask, DownloadStats};
 use super::json_formatter::rows_to_body;
 
 #[get("/health")]
@@ -15,6 +16,18 @@ async fn get_health() -> HttpResponse{
 
 #[post("/construct_database")]
 async fn construct_database(payload: web::Json<Build>) -> HttpResponse{
+    let response = format_db_response(payload.process());
+    return response;
+}
+
+#[post("/task/complete")]
+async fn complete_task(payload: web::Json<CompleteTask>) -> HttpResponse{
+    let response = format_db_response(payload.process());
+    return response;
+}
+
+#[get("/task/stats")]
+async fn download_stats(payload: web::Query<DownloadStats>) -> HttpResponse{
     let response = format_db_response(payload.process());
     return response;
 }
@@ -49,4 +62,7 @@ fn format_db_response(db_response: Result<Option<Vec<Row>>, String>) -> HttpResp
 pub fn init_endpoints(service_config: &mut web::ServiceConfig) {
     service_config.service(get_health);
     service_config.service(construct_database);
+
+    service_config.service(complete_task);
+    service_config.service(download_stats);
 }
