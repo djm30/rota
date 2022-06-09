@@ -1,19 +1,19 @@
 mod config;
 mod endpoints;
 mod database;
+mod tests;
 
 use actix_web::{App, HttpServer};
 use std::fs;
 use std::fs::OpenOptions;
 use std::io::Write;
 use chrono;
-use log::{error, warn, info, trace};
+use log::{error, warn, info, trace, debug};
 use log::{LevelFilter};
 use log::{Record, Level, Metadata};
 
 #[macro_use]
 extern crate lazy_static;
-
 
 struct SimpleLogger;
 impl log::Log for SimpleLogger {
@@ -22,6 +22,7 @@ impl log::Log for SimpleLogger {
             "trace" => Level::Trace,
             "info" => Level::Info,
             "warn" => Level::Warn,
+            "debug" => Level::Debug,
             "error" => Level::Error,            
             _ => panic!("{} {:?} - '{}' {}", Level::Error, chrono::offset::Local::now(), CONFIGURATION.logging.level, "is an invalid log level"),
         };
@@ -80,7 +81,8 @@ async fn main() -> std::io::Result<()> {
     // logger checks
     error!("This is an 'error' log");
     warn!("This is a 'warn' log");
-    info!("This is an 'info' log");   
+    info!("This is an 'info' log"); 
+    debug!("This is an 'debug' log"); 
     trace!("This is an 'info' log");   
 
     let server = HttpServer::new(|| App::new().configure(endpoints::init_endpoints));
