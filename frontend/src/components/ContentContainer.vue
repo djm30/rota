@@ -1,24 +1,50 @@
 <template>
   <div class="main">
-    <h1>Application</h1>
+    <h1 :style="{ color: h1Style }">Application</h1>
+    <HamburgerIcon @toggled="toggled" :open="open" />
     <div class="content-container">
-      <RequestsContainer />
       <RotaContainer />
     </div>
   </div>
 </template>
 
 <script>
-import RequestsContainer from "./RequestsContainer.vue";
 import RotaContainer from "./RotaContainer.vue";
+import HamburgerIcon from "./HamburgerIcon.vue";
 export default {
   name: "ContentContainer",
-  components: { RequestsContainer, RotaContainer },
+  components: { RotaContainer, HamburgerIcon },
+  data() {
+    return {
+      open: false,
+    };
+  },
+  methods: {
+    toggled(toggle) {
+      this.open = toggle;
+    },
+  },
+  watch: {
+    open() {
+      this.$emit("opened", this.open);
+    },
+  },
+  computed: {
+    h1Style() {
+      return this.open ? "#d3d0cb" : "#344055";
+    },
+  },
 };
 </script>
 
 <style>
+h1 {
+  z-index: 50;
+  transition: all 200ms;
+}
+
 .main {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -48,6 +74,18 @@ export default {
   .content-container {
     flex-direction: column;
     align-items: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  .main {
+    padding: 20px 0px;
   }
 }
 </style>

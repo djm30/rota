@@ -1,6 +1,6 @@
 <template>
   <div class="requests">
-    <h2>Requests</h2>
+    <h2 class="requests-header" id="font-size">Requests</h2>
     <div class="requests-container">
       <SingleRequest />
       <SingleRequest />
@@ -24,11 +24,20 @@ export default {
 
 <style scoped>
 .requests {
-  width: 33%;
+  width: 80%;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
+
+#font-size {
+}
+
+.requests-header {
+  font-size: 39px;
+  color: #d3d0cb;
+}
+
 .requests-container {
   padding-top: 24px;
   width: 100%;
@@ -37,6 +46,15 @@ export default {
 @media only screen and (max-width: 800px) {
   .requests {
     width: 90%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  h2 .requests-header {
+    font-size: 30px;
+  }
+  #font-size {
+    font-size: 30px;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <SideBar />
-    <ContentContainer />
+    <SideBar :slideOver="slideOpen" />
+    <ContentContainer @opened="slideOver" />
   </div>
 </template>
 
@@ -14,6 +14,16 @@ export default {
   components: {
     SideBar,
     ContentContainer,
+  },
+  data() {
+    return {
+      slideOpen: false,
+    };
+  },
+  methods: {
+    slideOver(open) {
+      this.slideOpen = open;
+    },
   },
 };
 </script>
