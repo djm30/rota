@@ -30,8 +30,26 @@ export default {
   padding-top: 24px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  width: 70%;
+  width: 90%;
   gap: 20px;
+}
+
+@media only screen and (max-width: 2000px) {
+  .rota--container {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .rota--container {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .rota--container {
+    width: 90%;
+  }
 }
 
 @media only screen and (max-width: 800px) {
@@ -40,6 +58,7 @@ export default {
   }
   .rota--container {
     grid-template-columns: repeat(1, 1fr);
+    width: 100%;
   }
 }
 </style>

@@ -84,5 +84,8 @@ h1 {
   h2 {
     font-size: 30px;
   }
+  .main {
+    padding: 20px 0px;
+  }
 }
 </style>

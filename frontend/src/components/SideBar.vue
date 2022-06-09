@@ -76,13 +76,20 @@ export default {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .spacer {
+    font-size: 36px;
+    margin-bottom: 29px;
+  }
+}
+
 .slideover--off {
   width: 0px;
   top: 0;
   left: -200px;
   z-index: 2;
   animation-name: slideover--rev;
-  animation-duration: 400ms;
+  animation-duration: 800ms;
   overflow: hidden;
 }
 
@@ -92,24 +99,28 @@ export default {
   left: 0;
   z-index: 2;
   animation-name: slideover;
-  animation-duration: 400ms;
+  animation-duration: 800ms;
 }
 
 @keyframes slideover {
   from {
-    width: 0px;
+    left: -800px;
+    width: 75%;
   }
   to {
     width: 100%;
+    left: 0;
   }
 }
 
 @keyframes slideover--rev {
+  to {
+    left: -800px;
+    width: 75%;
+  }
   from {
     width: 100%;
-  }
-  to {
-    width: 0px;
+    left: 0;
   }
 }
 </style>
