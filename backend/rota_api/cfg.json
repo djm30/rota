@@ -16,7 +16,7 @@
         }
     },
     "logging": {
-        "level": "info",
+        "level": "debug",
         "log_to_file": true,
         "file_path": "logs\\",
         "append_file": true,
