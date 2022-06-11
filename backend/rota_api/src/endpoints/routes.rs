@@ -6,6 +6,8 @@ use serde_json::Value;
 
 use crate::database::db_client::SqlStatement;
 use crate::database::build_models::Build;
+use crate::endpoints::job_wrapper::JobWrapper;
+
 use super::json_formatter::rows_to_body;
 
 #[get("/health")]
@@ -15,8 +17,13 @@ async fn get_health() -> HttpResponse{
 
 #[post("/construct_database")]
 async fn construct_database(payload: web::Json<Build>) -> HttpResponse{
-    let response = format_db_response(payload.process());
-    return response;
+    return process_sql("build", payload.into_inner());
+}
+
+fn process_sql(data_name: &str, sql_payload: impl SqlStatement) -> HttpResponse{
+    let mut job_wrapper = JobWrapper::new(data_name);
+    sql_payload.process(&mut job_wrapper);
+    return job_wrapper.get_http_response();
 }
 
 fn format_db_response(db_response: Result<Option<Vec<Row>>, String>) -> HttpResponse{

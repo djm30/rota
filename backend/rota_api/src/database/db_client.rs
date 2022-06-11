@@ -1,11 +1,21 @@
-use crate::CONFIGURATION;
+use crate::{CONFIGURATION, endpoints::job_wrapper::{JobWrapper, Object}};
 use postgres::{Client, NoTls, Row};
 use log::{error, info};
 
 pub trait SqlStatement{
     fn get_query_string() -> String;
     fn get_client() -> DbClient;
-    fn process(&self) -> Result<Option<Vec<Row>>, String>;
+    fn process(&self, response: &mut JobWrapper);
+    fn package_data(name: &str, raw_rows: Option<Vec<Row>>) -> Option<Object>{
+        match raw_rows {
+            Some(rows) => {
+                let data = Object::new(name);
+                
+                return Some(data);
+            },
+            None => return None,
+        }
+    }
 }
 
 pub struct DbClient{

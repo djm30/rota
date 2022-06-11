@@ -1,9 +1,9 @@
 use crate::CONFIGURATION;
+use crate::endpoints::job_wrapper::{JobWrapper, Object};
 use super::db_client::{DbClient, SqlStatement};
 use log::{error, warn, info};
 use serde::{Serialize, Deserialize};
 use std::{fs, io};
-use postgres::Row;
 
 #[derive(Deserialize, Serialize)]
 pub struct Build {
@@ -82,12 +82,11 @@ impl SqlStatement for Build {
         return DbClient::new();
     }
 
-    fn process(&self) -> Result<Option<Vec<Row>>, String> {        
+    fn process(&self, response: &mut JobWrapper){
         info!("Constructing database...\n\tdrop: {:?}\n\tbuild {:?}\n\tupdate {:?}", self.drop, self.build, self.update);        
 
         let mut queries: Vec<String>;
         let mut failed: bool;
-        let mut err_msg: String = "".to_string();
         
         if self.drop {
             info!("Performing drop");
@@ -100,7 +99,7 @@ impl SqlStatement for Build {
                 }
             });
             if failed {
-                err_msg.push_str("\n\tDrop failed");
+                response.add_err("Drop failed");                
             }
         }        
         if self.build {
@@ -122,8 +121,8 @@ impl SqlStatement for Build {
                 }
             });
             if failed {
-                err_msg.push_str("\n\tBuild failed");
-            }            
+                response.add_err("Build failed");
+            }
         }
         if self.update {
             warn!("Updates should only be performed once then incorporated into the build scripts");
@@ -136,15 +135,8 @@ impl SqlStatement for Build {
                 }
             });
             if failed {
-                err_msg.push_str("\n\tUpdate failed");
+                response.add_err("Update failed");                
             }
-        }
-
-        if err_msg.is_empty() {
-            return Ok(None);
-        }
-        else{
-            return Err(format!("The build failed: {} \nCheck the logs for more details", err_msg));
         }
     }
 }

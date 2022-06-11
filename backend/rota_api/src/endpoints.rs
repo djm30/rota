@@ -1,5 +1,5 @@
 pub mod routes;
 pub mod json_formatter;
-pub mod response;
+pub mod job_wrapper;
 
 pub use routes::init_endpoints;

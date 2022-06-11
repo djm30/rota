@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod test_object{
     use std::vec;
-    use crate::endpoints::response::{Object, Data};
+    use crate::endpoints::job_wrapper::{Object, Data};
 
     #[test]
     fn key_val_str(){                

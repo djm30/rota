@@ -3,15 +3,27 @@ use actix_web::dev::HttpResponseBuilder;
 use actix_web::HttpResponse;
 use actix_web::http::StatusCode;
 
-pub struct Response{
+pub struct JobWrapper{
     pub data: Object,
     pub errors: Vec<String>,
     pub warnings: Vec<String>,
     pub status: StatusCode,
 }
-impl Response{
+impl JobWrapper{
+    pub fn new(data_name: &str) -> Self{
+        return Self { 
+            data: Object::new(data_name), 
+            errors: vec![], 
+            warnings: vec![],
+            status: StatusCode::ACCEPTED
+        }
+    }
+
     pub fn set_data(&mut self, data: Object){
         self.data = data;
+    }
+    pub fn add_data(&mut self, val: Box<dyn Data>){
+        self.data.add_val(val)
     }
 
     pub fn add_err(&mut self, err: &str){
@@ -21,16 +33,25 @@ impl Response{
         self.errors.push(warn.to_string());
     }
 
+    pub fn has_err(&self) -> bool{
+        return self.errors.is_empty();
+    }
+    pub fn has_warn(&self) -> bool{
+        return self.warnings.is_empty();
+    }
+
     pub fn set_status(&mut self, status: StatusCode){
         self.status = status;
     }
 
-    
     pub fn get_http_response(&mut self) -> HttpResponse{
         let mut err: Object = Object::new_vec_str("errors", self.errors.iter().map(AsRef::as_ref).collect());
         let mut warn: Object = Object::new_vec_str("warnings", self.warnings.iter().map(AsRef::as_ref).collect());
-
-        let json = format!("{{{},{},{}}}", self.data.format(), err.format(), warn.format());
+        
+        let json = match self.data.val.len() == 1 {
+            true => format!("{{{},{},{}}}", self.data.format(), err.format(), warn.format()),
+            false => format!("{{{},{}}}", err.format(), warn.format())
+        };        
 
         return HttpResponseBuilder::new(self.status).json(json);
     }
